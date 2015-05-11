@@ -9,4 +9,8 @@ namespace :spec do
 
   rspec_task(:develop) do
   end
+
+  rspec_task(:ci) do
+    add_opts "--color -fd"
+  end
 end
