@@ -6,3 +6,6 @@ rvm:
 before_install:
   - "gem install tictactoe-core-0.1.0.gem"
 script: "rake spec:ci"
+addons:
+  code_climate:
+      repo_token: 346743021e52e84be327c385d340c884f493dc6d975ce479538056a804444fff
