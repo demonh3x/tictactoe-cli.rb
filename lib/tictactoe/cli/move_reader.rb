@@ -45,7 +45,7 @@ module Tictactoe
 
       def read_input
         str = input.gets
-        raise "No data readed from the CLI input!" if str.nil?
+        raise "No data read from the CLI input!" if str.nil?
         str.chomp
       end
 

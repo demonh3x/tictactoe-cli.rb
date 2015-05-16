@@ -22,7 +22,7 @@ RSpec.describe Tictactoe::Cli::MoveReader do
 
     describe "given no input" do
       it "raises an error" do
-        expect{reader.get_move!}.to raise_error("No data readed from the CLI input!")
+        expect{reader.get_move!}.to raise_error("No data read from the CLI input!")
       end
     end
 
