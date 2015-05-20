@@ -3,14 +3,12 @@ require 'tictactoe/cli/options/cli_asker'
 require 'tictactoe/cli/options/play_again_option'
 require 'tictactoe/cli/options/board_type_selection'
 require 'tictactoe/cli/options/players_selection'
-require 'tictactoe/cli/move_reader'
 require 'tictactoe/cli/board_formatter'
+require 'tictactoe/players/human'
 
 module Tictactoe
   module Cli
     class Runner
-      attr_reader :input, :output, :random, :ttt, :asker, :board_type, :who_will_play, :play_again
-
       def initialize(input=$stdin, output=$stdout, random=Random.new)
         @input = input
         @output = output
@@ -25,11 +23,8 @@ module Tictactoe
       def run
         begin 
           reset_game
-          set_board_size
-          set_players
 
           print_board
-
           begin
             make_move
             print_board
@@ -40,34 +35,29 @@ module Tictactoe
       end
 
       private
+      attr_reader :input, :output, :random, :game, :asker, :board_type, :who_will_play, :play_again
+
       def reset_game
-        @ttt = Game.new(random)
-      end
-
-      def set_board_size
-        ttt.set_board_size(board_type.read)
-      end
-
-      def set_players
+        board_size = board_type.read
         players = who_will_play.read
-        ttt.set_player_x(players[0])
-        ttt.set_player_o(players[1])
+        @game = Game.new(board_size, players[0], players[1], random)
+        game.register_human_factory(lambda{|mark| Players::Human.new(mark, input, output)})
       end
 
       def print_board
-        output.puts BoardFormatter.new.format(ttt.marks)
+        output.puts BoardFormatter.new.format(game.marks)
       end
 
       def make_move
-        ttt.tick(MoveReader.new(input, output, ttt))
+        game.tick()
       end
 
       def is_game_finished?
-        ttt.is_finished?
+        game.is_finished?
       end
 
       def print_result
-        output.puts announcement_of ttt.winner if ttt.is_finished?
+        output.puts announcement_of game.winner if game.is_finished?
       end
 
       def announcement_of(winner)
