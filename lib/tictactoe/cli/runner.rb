@@ -49,7 +49,7 @@ module Tictactoe
       end
 
       def make_move
-        game.tick()
+        game.tick
       end
 
       def is_game_finished?
@@ -57,7 +57,7 @@ module Tictactoe
       end
 
       def print_result
-        output.puts announcement_of game.winner if game.is_finished?
+        output.puts(announcement_of(game.winner))if game.is_finished?
       end
 
       def announcement_of(winner)

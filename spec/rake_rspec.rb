@@ -1,13 +1,15 @@
 require 'rspec/core/rake_task'
   
 class RSpecTask
+  attr_reader :task
+
   def initialize(task)
     @task = task
   end
 
   def add_opts(opts)
-    @task.rspec_opts ||= ""
-    @task.rspec_opts += " #{opts}"
+    task.rspec_opts ||= ""
+    task.rspec_opts += " #{opts}"
   end
 
   def include_tag(tag)
@@ -31,7 +33,7 @@ class RSpecTask
   end
 
   def method_missing(sym, *args, &block)
-    @task.send sym, *args, &block
+    task.send sym, *args, &block
   end
 end
 

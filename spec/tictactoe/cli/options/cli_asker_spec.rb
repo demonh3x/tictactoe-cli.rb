@@ -12,7 +12,7 @@ RSpec.describe Tictactoe::Cli::Options::CliAsker do
         "::selection_1::" => "::option_1::",
         "::selection_2::" => "::option_2::",
       }
-      @response = @asker.ask_for_one message, options
+      @response = @asker.ask_for_one(message, options)
     end
 
     it "should ask to select one" do
@@ -27,7 +27,7 @@ RSpec.describe Tictactoe::Cli::Options::CliAsker do
     end
 
     it "should read the response" do
-      expect(@response).to eq "::selection_1::"
+      expect(@response).to eq("::selection_1::")
     end
   end
 
@@ -40,7 +40,7 @@ RSpec.describe Tictactoe::Cli::Options::CliAsker do
         "::selection_1::" => "::option_1::",
         "::selection_2::" => "::option_2::",
       }
-      @response = @asker.ask_for_one "::message::", options
+      @response = @asker.ask_for_one("::message::", options)
     end
 
     it "should say thats an invalid response and ask again" do

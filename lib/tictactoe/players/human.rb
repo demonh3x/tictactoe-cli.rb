@@ -25,7 +25,7 @@ module Tictactoe
         begin
           move = read_move
           available = available?(move, state)
-          print_not_available() if !available
+          print_not_available if !available
         end until available
 
         move
@@ -57,11 +57,11 @@ module Tictactoe
       end
 
       def print_invalid_input(input_string)
-        output.puts "Don't understand \"#{input_string}\". Please, make sure you use a number."
+        output.puts("Don't understand \"#{input_string}\". Please, make sure you use a number.")
       end
 
       def print_not_available
-        output.puts "That move is not available. Please, try another one.\n"
+        output.puts("That move is not available. Please, try another one.\n")
       end
     end
   end

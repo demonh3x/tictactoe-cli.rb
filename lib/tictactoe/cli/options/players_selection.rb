@@ -18,10 +18,14 @@ module Tictactoe
           response = asker.ask_for_one(QUESTION, OPTIONS)
 
           case response
-          when "1" then [:human, :human]
-          when "2" then [:human, :computer]
-          when "3" then [:computer, :human]
-          when "4" then [:computer, :computer]
+          when "1"
+            [:human, :human]
+          when "2"
+            [:human, :computer]
+          when "3" 
+            [:computer, :human]
+          when "4" 
+            [:computer, :computer]
           end
         end
 

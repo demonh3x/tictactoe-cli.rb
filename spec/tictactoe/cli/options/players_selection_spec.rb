@@ -3,7 +3,7 @@ require 'tictactoe/cli/options/players_selection'
 
 RSpec.describe Tictactoe::Cli::Options::PlayersSelection do
   it 'when reading, asks the question' do
-    asker = spy()
+    asker = spy
     described_class.new(asker).read
     expect(asker).to have_received(:ask_for_one).with(
       "Who will play?",
@@ -22,18 +22,18 @@ RSpec.describe Tictactoe::Cli::Options::PlayersSelection do
   end
 
   it 'when selecting 1, is human vs human' do
-    expect_players_selected "1", [:human, :human]
+    expect_players_selected("1", [:human, :human])
   end
 
   it 'when selecting 2, is human vs computer' do
-    expect_players_selected "2", [:human, :computer]
+    expect_players_selected("2", [:human, :computer])
   end
 
   it 'when selecting 3, is computer vs human' do
-    expect_players_selected "3", [:computer, :human]
+    expect_players_selected("3", [:computer, :human])
   end
   
   it 'when selecting 4, is computer vs computer' do
-    expect_players_selected "4", [:computer, :computer]
+    expect_players_selected("4", [:computer, :computer])
   end
 end

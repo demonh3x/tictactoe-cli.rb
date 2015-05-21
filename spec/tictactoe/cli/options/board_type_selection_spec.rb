@@ -3,7 +3,7 @@ require 'tictactoe/cli/options/board_type_selection'
 
 RSpec.describe Tictactoe::Cli::Options::BoardTypeSelection do
   it 'when reading, asks the question' do
-    asker = spy()
+    asker = spy
     described_class.new(asker).read
     expect(asker).to have_received(:ask_for_one).with(
       "What will be the size of the board?",
