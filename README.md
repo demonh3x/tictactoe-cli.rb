@@ -5,17 +5,16 @@
 
 ## Description
 
-This is a [command line interface][cli] for tictactoe-core.rb
+This is a [command line interface][cli] for [tictactoe-core.rb][core]
 
 [cli]: http://en.wikipedia.org/wiki/Command-line_interface
+[core]: https://github.com/demonh3x/tictactoe-core.rb
 
 ## Dependencies
 
 ##### Execution
 * Ruby, from v2.0.0 to 2.2.0 (other versions might work too)
 * [tictactoe-core.rb][core] v0.1.2
-
-[core]: https://github.com/demonh3x/tictactoe-core.rb
 
 ##### Testing
 * [RSpec][rspec] 3.1.0
