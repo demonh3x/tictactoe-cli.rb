@@ -4,44 +4,52 @@ require 'tictactoe/cli/options/play_again_option'
 require 'tictactoe/cli/options/board_type_selection'
 require 'tictactoe/cli/options/players_selection'
 require 'tictactoe/cli/board_formatter'
+require 'tictactoe/players/factory'
+require 'tictactoe/players/perfect_computer'
 require 'tictactoe/players/human'
 
 module Tictactoe
   module Cli
     class Runner
       def initialize(input=$stdin, output=$stdout, random=Random.new)
-        @input = input
-        @output = output
-        @random = random
+        self.output = output
 
-        @asker = Options::CliAsker.new(input, output)
-        @board_type = Options::BoardTypeSelection.new(asker)
-        @who_will_play = Options::PlayersSelection.new(asker)
-        @play_again = Options::PlayAgainOption.new(asker)
+        self.players_factory = self.class.create_players_factory(input, output, random)
+
+        self.asker = Options::CliAsker.new(input, output)
+        self.board_type = Options::BoardTypeSelection.new(asker)
+        self.who_will_play = Options::PlayersSelection.new(asker)
+        self.play_again = Options::PlayAgainOption.new(asker)
       end
 
       def run
-        begin 
+        begin
           reset_game
 
           print_board
           begin
             make_move
             print_board
-          end until is_game_finished?
+          end until game_finished?
 
           print_result
         end while play_again?
       end
 
       private
-      attr_reader :input, :output, :random, :game, :asker, :board_type, :who_will_play, :play_again
+      attr_accessor :output, :players_factory, :game, :asker, :board_type, :who_will_play, :play_again
+
+      def self.create_players_factory(input, output, random)
+        factory = Tictactoe::Players::Factory.new
+        factory.register(:computer, lambda { |mark| Tictactoe::Players::PerfectComputer.new(mark, random) })
+        factory.register(:human, lambda { |mark| Players::Human.new(mark, input, output) })
+        factory
+      end
 
       def reset_game
         board_size = board_type.read
         players = who_will_play.read
-        @game = Game.new(board_size, players[0], players[1], random)
-        game.register_human_factory(lambda{|mark| Players::Human.new(mark, input, output)})
+        self.game = Game.new(players_factory, board_size, players[0], players[1])
       end
 
       def print_board
@@ -52,7 +60,7 @@ module Tictactoe
         game.tick
       end
 
-      def is_game_finished?
+      def game_finished?
         game.is_finished?
       end
 
