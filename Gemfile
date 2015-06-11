@@ -1,5 +1,5 @@
 source :rubygems
-gem "tictactoe-core" , "~> 0.1.1"
+gem "tictactoe-core" , "~> 0.1.2"
 
 group :test do
   gem "rspec" , "~> 3.1.0"
