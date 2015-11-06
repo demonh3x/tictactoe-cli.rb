@@ -1,5 +1,5 @@
 # tictactoe-cli.rb
-[![Travis CI](https://travis-ci.org/demonh3x/tictactoe-cli.rb.svg)](https://travis-ci.org/demonh3x/tictactoe-cli.rb)
+[![Build Status](https://travis-ci.org/mateuadsuara/tictactoe-cli.rb.svg?branch=remove-old-runtests)](https://travis-ci.org/mateuadsuara/tictactoe-cli.rb)
 [![Code Climate](https://codeclimate.com/github/demonh3x/tictactoe-cli.rb/badges/gpa.svg)](https://codeclimate.com/github/demonh3x/tictactoe-cli.rb)
 [![Test Coverage](https://codeclimate.com/github/demonh3x/tictactoe-cli.rb/badges/coverage.svg)](https://codeclimate.com/github/demonh3x/tictactoe-cli.rb/coverage)
 
